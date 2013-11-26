@@ -86,6 +86,9 @@ describe('Core Transformations', function() {
         name: 'string',
         username: {
           columnName: 'login'
+        },
+        password: {
+          columnName: 'password'
         }
       };
 
@@ -96,6 +99,12 @@ describe('Core Transformations', function() {
       var values = transformer.unserialize({ login: 'foo' });
       assert(values.username);
       assert(values.username === 'foo');
+    });
+    
+    it('shouldnt delete password key when it matches the column name', function() {
+      var values = transformer.unserialize({ password: 'bar' });
+      assert(values.password);
+      assert(values.password === 'bar');
     });
   });
 
